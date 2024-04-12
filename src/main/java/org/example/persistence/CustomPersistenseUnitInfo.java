@@ -39,6 +39,11 @@ public class CustomPersistenseUnitInfo implements PersistenceUnitInfo {
     }
 
     @Override
+    public List<String> getManagedClassNames() {
+        return List.of("org.example.entities.Employee");
+    }
+
+    @Override
     public DataSource getNonJtaDataSource() {
         return null;
     }
@@ -58,10 +63,7 @@ public class CustomPersistenseUnitInfo implements PersistenceUnitInfo {
         return null;
     }
 
-    @Override
-    public List<String> getManagedClassNames() {
-        return List.of("org.example.entities.Product");
-    }
+
 
     @Override
     public boolean excludeUnlistedClasses() {
