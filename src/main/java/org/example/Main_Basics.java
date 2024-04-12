@@ -9,7 +9,7 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main {
+public class Main_Basics {
     public static void main(String[] args) {
 
 
