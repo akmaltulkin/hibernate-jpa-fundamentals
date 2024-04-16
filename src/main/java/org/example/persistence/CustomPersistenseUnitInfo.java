@@ -42,7 +42,11 @@ public class CustomPersistenseUnitInfo implements PersistenceUnitInfo {
     public List<String> getManagedClassNames() {
         return List.of("org.example.entities.Employee",
                   "org.example.entities.Person",
-                "org.example.entities.Passport");
+                "org.example.entities.Passport",
+                "org.example.entities.Post",
+                "org.example.entities.Comment",
+                "org.example.entities.Student",
+                "org.example.entities.Course");
     }
 
     @Override
