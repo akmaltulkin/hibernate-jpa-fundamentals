@@ -1,21 +1,27 @@
-package org.example;
+package org.example.runners;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.example.entities.Employee;
+import org.example.entities.Course;
+import org.example.entities.Student;
+import org.example.entities.inheritance.Book;
+import org.example.entities.inheritance.ElectronicDevice;
 import org.example.persistence.CustomPersistenseUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Main_Basics {
+public class Main05_Inheritance {
     public static void main(String[] args) {
 
 
         Map<String,String> props = new HashMap<>();
         props.put("hibernate.show_sql","true"); // show sql in the console
         props.put("hibernate.hbm2ddl.auto","create"); // create the schema automatically based on the entities
+
+
 
         EntityManagerFactory emf = new HibernatePersistenceProvider()
                 .createContainerEntityManagerFactory(new CustomPersistenseUnitInfo(), props);// create an entity manager factory using the custom persistence unit info
@@ -25,21 +31,23 @@ public class Main_Basics {
         try {
             entityManager.getTransaction().begin(); // start a transaction
 
-            entityManager.persist(new Employee(1, "Jack Dorsey", "123 Main St")); // insert a new record
 
-            Employee employee = entityManager.find(Employee.class, 1);// retrieve a record
+            Book book = new Book();
+            book.setId(1);
+            book.setAuthor("John Doe");
 
-            System.out.println(employee); //Employee(id=1, name=Jack Dorsey, address=123 Main St)
+            ElectronicDevice electronicDevice = new ElectronicDevice();
+            electronicDevice.setId(2);
+            electronicDevice.setVolatage(220);
 
-            employee.setName("Jack Black"); // update the record
+            entityManager.persist(book);
+            entityManager.persist(electronicDevice);
 
-            System.out.println(employee); //Employee(id=1, name=Jack Black, address=123 Main St)
 
-            entityManager.remove(employee); // delete the record
 
-            Employee employee1 = new Employee(2, "Jane Doe", "456 Main St");
 
-            entityManager.merge(employee1); // insert or update the record
+
+
 
 
 

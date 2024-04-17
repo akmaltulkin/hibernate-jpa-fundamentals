@@ -1,17 +1,17 @@
-package org.example;
+package org.example.runners;
 
-import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.example.entities.Passport;
-import org.example.entities.Person;
+import org.example.entities.Comment;
+import org.example.entities.Post;
 import org.example.persistence.CustomPersistenseUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Main_Entity_Relationships1_One_To_One {
+public class Main03_Entity_Relationships_One_To_Many_Many_To_One {
     public static void main(String[] args) {
 
 
@@ -28,17 +28,27 @@ public class Main_Entity_Relationships1_One_To_One {
             entityManager.getTransaction().begin(); // start a transaction
 
 
-            for (int i = 0; i < 100; i++) {
+            Post post = new Post();
+            post.setTitle("My first post");
+            post.setContent("This is my first post content");
 
-                Person person = new Person();
-                person.setName(new Faker().name().fullName());
-                Passport passport = new Passport();
-                passport.setNumber(new Faker().idNumber().valid());
-                person.setPassport(passport);
-                entityManager.persist(person); // no need to persist the passport entity, it will be persisted automatically due to the cascade property in the Person entity
+            Comment comment1 = new Comment();
+            comment1.setContent("This is my first comment");
 
 
-            }
+            Comment comment2 = new Comment();
+            comment2.setContent("This is my second comment");
+
+            //It is important to set the relationship on both sides
+            post.setComments(List.of(comment1, comment2));
+            comment1.setPost(post);
+            comment2.setPost(post);
+
+            //persist the post entity, cascade will persist the comments
+            entityManager.persist(post);
+
+
+
 
 
 

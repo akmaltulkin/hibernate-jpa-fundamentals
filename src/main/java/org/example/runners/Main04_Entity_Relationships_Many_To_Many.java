@@ -1,9 +1,9 @@
-package org.example;
+package org.example.runners;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.example.entities.Comment;
-import org.example.entities.Post;
+import org.example.entities.Course;
+import org.example.entities.Student;
 import org.example.persistence.CustomPersistenseUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
@@ -11,13 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main_Entity_Relationships2_One_To_Many_Many_To_One {
+public class Main04_Entity_Relationships_Many_To_Many {
     public static void main(String[] args) {
 
 
         Map<String,String> props = new HashMap<>();
         props.put("hibernate.show_sql","true"); // show sql in the console
-        props.put("hibernate.hbm2ddl.auto","create"); // create the schema automatically based on the entities
+
+
 
         EntityManagerFactory emf = new HibernatePersistenceProvider()
                 .createContainerEntityManagerFactory(new CustomPersistenseUnitInfo(), props);// create an entity manager factory using the custom persistence unit info
@@ -28,25 +29,31 @@ public class Main_Entity_Relationships2_One_To_Many_Many_To_One {
             entityManager.getTransaction().begin(); // start a transaction
 
 
-            Post post = new Post();
-            post.setTitle("My first post");
-            post.setContent("This is my first post content");
+            Student student = new Student();
+            student.setName("John Doe");
 
-            Comment comment1 = new Comment();
-            comment1.setContent("This is my first comment");
+            Student student2 = new Student();
+            student2.setName("Jane Doe");
 
 
-            Comment comment2 = new Comment();
-            comment2.setContent("This is my second comment");
+            Course course = new Course();
+            course.setName("Math");
+
+            Course course2 = new Course();
+            course2.setName("Science");
+
 
             //It is important to set the relationship on both sides
-            post.setComments(List.of(comment1, comment2));
-            comment1.setPost(post);
-            comment2.setPost(post);
+           course.setStudents(List.of(student, student2));
+           course2.setStudents(List.of(student2));
 
-            //persist the post entity, cascade will persist the comments
-            entityManager.persist(post);
+              student.setCourses(List.of(course));
+              student2.setCourses(List.of(course, course2));
 
+
+          // persist the course entity, cascade will persist the students
+           entityManager.persist(course);
+           entityManager.persist(course2);
 
 
 

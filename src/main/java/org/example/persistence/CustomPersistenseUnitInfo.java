@@ -46,7 +46,10 @@ public class CustomPersistenseUnitInfo implements PersistenceUnitInfo {
                 "org.example.entities.Post",
                 "org.example.entities.Comment",
                 "org.example.entities.Student",
-                "org.example.entities.Course");
+                "org.example.entities.Course",
+                "org.example.entities.inheritance.Product",
+                "org.example.entities.inheritance.Book",
+                "org.example.entities.inheritance.ElectronicDevice");
     }
 
     @Override
