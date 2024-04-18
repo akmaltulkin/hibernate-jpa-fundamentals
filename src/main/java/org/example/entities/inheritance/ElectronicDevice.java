@@ -3,7 +3,7 @@ package org.example.entities.inheritance;
 import jakarta.persistence.Entity;
 
 @Entity
-public class ElectronicDevice extends Product{
+public class ElectronicDevice extends Products {
     private int voltage;
 
     public ElectronicDevice() {

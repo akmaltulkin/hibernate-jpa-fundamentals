@@ -5,9 +5,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.example.entities.Passport;
 import org.example.entities.Person;
+import org.example.entities.Product;
 import org.example.persistence.CustomPersistenseUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,12 +32,17 @@ public class Main02_Entity_Relationships_One_To_One {
 
             for (int i = 0; i < 100; i++) {
 
-                Person person = new Person();
-                person.setName(new Faker().name().fullName());
-                Passport passport = new Passport();
-                passport.setNumber(new Faker().idNumber().valid());
-                person.setPassport(passport);
-                entityManager.persist(person); // no need to persist the passport entity, it will be persisted automatically due to the cascade property in the Person entity
+                Product product = new Product();
+                product.setName(new Faker().commerce().productName());
+                product.setPrice(BigDecimal.valueOf(new Faker().number().randomDouble(2, 1, 1000)));
+                entityManager.persist(product);
+
+//                Person person = new Person();
+//                person.setName(new Faker().name().fullName());
+//                Passport passport = new Passport();
+//                passport.setNumber(new Faker().idNumber().valid());
+//                person.setPassport(passport);
+//                entityManager.persist(person); // no need to persist the passport entity, it will be persisted automatically due to the cascade property in the Person entity
 
 
             }

@@ -3,7 +3,7 @@ package org.example.entities.inheritance;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Book extends Product {
+public class Book extends Products {
 
     private String author;
 

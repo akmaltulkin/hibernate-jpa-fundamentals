@@ -45,11 +45,15 @@ public class CustomPersistenseUnitInfo implements PersistenceUnitInfo {
                 "org.example.entities.Passport",
                 "org.example.entities.Post",
                 "org.example.entities.Comment",
-                "org.example.entities.Student",
-                "org.example.entities.Course",
-                "org.example.entities.inheritance.Product",
+//                "org.example.entities.Student",
+//                "org.example.entities.Course",
+                "org.example.entities.Product",
+                "org.example.entities.inheritance.Products",
                 "org.example.entities.inheritance.Book",
-                "org.example.entities.inheritance.ElectronicDevice");
+                "org.example.entities.inheritance.ElectronicDevice",
+                "org.example.entities.joinsExample.Course",
+                "org.example.entities.joinsExample.Student",
+                "org.example.entities.joinsExample.Enrollment");
     }
 
     @Override
